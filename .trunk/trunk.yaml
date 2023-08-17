@@ -12,7 +12,7 @@ merge:
 lint:
   definitions:
     - name: foo
-      files: [README.md]
+      files: [ALL]
       commands:
         - output: rewrite
           success_codes: [0, 1]
