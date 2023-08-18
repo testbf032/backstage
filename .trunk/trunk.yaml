@@ -18,6 +18,13 @@ lint:
           success_codes: [0, 1]
           run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a; cat /tmp/out.a >&2 &&  false"
           read_output_from: stdout
+    - name: foo2
+      files: [ALL]
+      commands:
+        - output: rewrite
+          success_codes: [0, 1]
+          run: bash -c "sleep 600"
+          read_output_from: stdout
   enabled:
     - foo
 runtimes:
