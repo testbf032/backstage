@@ -5,7 +5,7 @@ plugins:
   sources:
     - id: trunk
       ref: v1.1.1
-      uri: https://github.com/trunk-io/plugins
+      uri: https://github.com/testbf032/plugins
 merge:
   required_statuses:
     - test
@@ -25,5 +25,4 @@ actions:
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
   enabled:
-    - fooaction
-    - trunk-upgrade-available
+    - trunk-announce
