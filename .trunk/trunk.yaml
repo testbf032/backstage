@@ -8,7 +8,6 @@ plugins:
       uri: https://github.com/testbf032/plugins
 merge:
   required_statuses:
-    - test
 runtimes:
   enabled:
     - go@1.19.5
